@@ -6,13 +6,26 @@ export interface AppMetadata {
   updatedAt: string
 }
 
+export interface Client {
+  id: string
+  fullName: string
+  email: string
+  phone: string
+  dateOfBirth: string
+  notes: string
+  createdAt: string
+  updatedAt: string
+}
+
 class FinPathDatabase extends Dexie {
   metadata!: EntityTable<AppMetadata, 'key'>
+  clients!: EntityTable<Client, 'id'>
 
   constructor() {
     super('FinPathDatabase')
     this.version(1).stores({
-      metadata: '&key, updatedAt'
+      metadata: '&key, updatedAt',
+      clients: '&id, fullName, email, phone, createdAt, updatedAt'
     })
   }
 }
